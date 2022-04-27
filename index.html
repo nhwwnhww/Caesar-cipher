@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+            margin-top: 20vh;
+            width: 100%;
+            height: 80vh;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <label for="">input</label>
+        <input type="text" id="input" size="50">
+        <br>
+        <label for="">'k' value</label>
+        <input type="text" id="k_value" size="10">
+        <br>
+        <button onclick="input()">encry</button>
+        <br>
+        <input type="text" id="output" disabled size="50">
+    </div>
+
+    <hr>
+    <button onclick="full()">fully</button>
+    <p id="show_all"></p>
+
+    <script>
+
+        // word frequency
+
+        function input(){
+            var str = document.getElementById('input').value;
+            var k = document.getElementById('k_value').value;
+            var ans = rot(str,parseInt(k));
+            document.getElementById('output').value = ans;
+        }
+        function full(){
+            var str = document.getElementById('input').value;
+            document.getElementById('show_all').value = str;
+            var show = document.getElementById('show_all');
+            show.innerHTML = "";
+            for (var i = 1; i < 27;i++){
+                var ans = rot(str,i);
+                var h3 = document.createElement("h3");
+                h3.innerText = ans;
+                show.appendChild(h3);
+            }
+        }
+        function rot(str,k){
+            return str.replace(/./g, (s) => {
+                var s_code = s.charCodeAt(0);
+
+                // special symbol part 1
+                if (s_code >= 32 && s_code <= 47){
+                    s_code += k;
+                    while (s_code > 47){
+                        s_code -= 16;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+
+                // number
+                if (s_code >= 48 && s_code <= 57){
+                    s_code += k;
+                    while (s_code > 57){
+                        s_code -= 10;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+
+                // special symbol part 2
+                if (s_code >= 58 && s_code <= 64){
+                    s_code += k;
+                    while (s_code > 64){
+                        s_code -= 7;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+
+                // uppercase letter
+                if (s_code >= 65 && s_code <= 90){
+                    s_code += k;
+                    while (s_code > 90){
+                        s_code -= 26;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+
+                // special symbol part 3
+                if (s_code >= 91 && s_code <= 96){
+                    s_code += k;
+                    while (s_code > 96){
+                        s_code -= 6;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+
+                // lowercase letter
+                if (s_code >= 97 && s_code <= 122){
+                    s_code += k;
+                    while (s_code > 122){
+                        s_code -= 26;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+
+                // special symbol part 4
+                if (s_code >= 123 && s_code <= 126){
+                    s_code += k;
+                    while (s_code > 126){
+                        s_code -= 4;
+                    }
+                    return String.fromCharCode(s_code);
+                };
+                
+                
+            });
+
+            
+        }
+        
+
+    </script>
+</body>
+</html>
