@@ -15,6 +15,7 @@
             flex-direction: column;
         }
     </style>
+    
 </head>
 <body>
     <div id="main">
@@ -27,6 +28,9 @@
         <button onclick="input()">encry</button>
         <br>
         <input type="text" id="output" disabled size="50">
+        <h6 id="output2"></h6>
+        <br>
+        <button onclick="output_decrypt()">decrypt</button>
     </div>
 
     <hr>
@@ -35,100 +39,34 @@
 
     <script>
 
-        // word frequency
-
         function input(){
-            var str = document.getElementById('input').value;
-            var k = document.getElementById('k_value').value;
-            var ans = rot(str,parseInt(k));
+            let str = document.getElementById('input').value;
+            let k = document.getElementById('k_value').value;
+            let ans = rot(str,parseInt(k));
             document.getElementById('output').value = ans;
         }
         function full(){
-            var str = document.getElementById('input').value;
+            let str = document.getElementById('input').value;
             document.getElementById('show_all').value = str;
-            var show = document.getElementById('show_all');
+            let show = document.getElementById('show_all');
             show.innerHTML = "";
-            for (var i = 1; i < 27;i++){
-                var ans = rot(str,i);
-                var h3 = document.createElement("h3");
+            for (let i = 1; i < 27;i++){
+                let ans = rot(str,i);
+                let h3 = document.createElement("h3");
                 h3.innerText = ans;
                 show.appendChild(h3);
             }
         }
-        function rot(str,k){
-            return str.replace(/./g, (s) => {
-                var s_code = s.charCodeAt(0);
-
-                // special symbol part 1
-                if (s_code >= 32 && s_code <= 47){
-                    s_code += k;
-                    while (s_code > 47){
-                        s_code -= 16;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-
-                // number
-                if (s_code >= 48 && s_code <= 57){
-                    s_code += k;
-                    while (s_code > 57){
-                        s_code -= 10;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-
-                // special symbol part 2
-                if (s_code >= 58 && s_code <= 64){
-                    s_code += k;
-                    while (s_code > 64){
-                        s_code -= 7;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-
-                // uppercase letter
-                if (s_code >= 65 && s_code <= 90){
-                    s_code += k;
-                    while (s_code > 90){
-                        s_code -= 26;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-
-                // special symbol part 3
-                if (s_code >= 91 && s_code <= 96){
-                    s_code += k;
-                    while (s_code > 96){
-                        s_code -= 6;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-
-                // lowercase letter
-                if (s_code >= 97 && s_code <= 122){
-                    s_code += k;
-                    while (s_code > 122){
-                        s_code -= 26;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-
-                // special symbol part 4
-                if (s_code >= 123 && s_code <= 126){
-                    s_code += k;
-                    while (s_code > 126){
-                        s_code -= 4;
-                    }
-                    return String.fromCharCode(s_code);
-                };
-                
-                
-            });
-
-            
+        function output_decrypt(){
+            let str = document.getElementById('input').value;
+            let key = decrypt(str);
+            document.getElementById('output2').innerText = key;
         }
+        
         
 
     </script>
+    <script src="./Casear_chipher_libary.js"></script>
+    <script src="./word_frequency.js"></script>
 </body>
 </html>
