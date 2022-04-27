@@ -5,6 +5,9 @@ function rot(str,k){
         // special symbol part 1
         if (s_code >= 32 && s_code <= 47){
             s_code += k;
+            while (s_code < 32){    
+                s_code = 32 - s_code + 32;
+            }
             while (s_code > 47){
                 s_code -= 16;
             }
@@ -14,6 +17,9 @@ function rot(str,k){
         // number
         if (s_code >= 48 && s_code <= 57){
             s_code += k;
+            while (s_code < 48){
+                s_code = 48 - s_code + 48;
+            }
             while (s_code > 57){
                 s_code -= 10;
             }
@@ -23,6 +29,9 @@ function rot(str,k){
         // special symbol part 2
         if (s_code >= 58 && s_code <= 64){
             s_code += k;
+            while (s_code < 58){
+                s_code = 58 - s_code + 58;
+            }
             while (s_code > 64){
                 s_code -= 7;
             }
@@ -32,6 +41,9 @@ function rot(str,k){
         // uppercase letter
         if (s_code >= 65 && s_code <= 90){
             s_code += k;
+            while (s_code < 65){
+                s_code = 65 - s_code + 65;
+            }
             while (s_code > 90){
                 s_code -= 26;
             }
@@ -41,6 +53,9 @@ function rot(str,k){
         // special symbol part 3
         if (s_code >= 91 && s_code <= 96){
             s_code += k;
+            while (s_code < 91){
+                s_code = 91 - s_code + 91;
+            }
             while (s_code > 96){
                 s_code -= 6;
             }
@@ -50,6 +65,9 @@ function rot(str,k){
         // lowercase letter
         if (s_code >= 97 && s_code <= 122){
             s_code += k;
+            while (s_code < 97){
+                s_code = 97 - s_code + 97;
+            }
             while (s_code > 122){
                 s_code -= 26;
             }
@@ -59,8 +77,11 @@ function rot(str,k){
         // special symbol part 4
         if (s_code >= 123 && s_code <= 126){
             s_code += k;
+            while (s_code < 123){
+                s_code = 123 - s_code + 123;
+            }
             while (s_code > 126){
-                s_code -= 4;
+                s_code -= 4;            
             }
             return String.fromCharCode(s_code);
         };
