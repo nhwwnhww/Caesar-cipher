@@ -9,9 +9,24 @@
 
     <script src="https://js.cx/libs/animate.js"></script>
 
-    <title>Document</title>
+    <title>Caesar cipher</title>
     <style>
-        
+        /* 滚动槽 */
+        ::-webkit-scrollbar {
+            width: 15px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            border-radius: 3px;
+            background: rgba(81, 75, 75, 0.06);
+            -webkit-box-shadow: inset 0 0 10px rgba(33, 44, 33, 0.61);
+        }
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.12);
+            -webkit-box-shadow: inset 0 0 10px rgba(23, 16, 16, 0.952);
+        }
     </style>
     
 </head>
@@ -21,31 +36,50 @@
         <div class="container-fluid">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#section1">Section 1</a>
+              <a class="nav-link" href="#section1">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#section2">Section 2</a>
+              <a class="nav-link" href="#section2">Introduction</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#section3">Section 3</a>
+              <a class="nav-link" href="#section3">Caesar cipher</a>
             </li>
           </ul>
         </div>
     </nav>
 
-    <div id="section1" class="container-fluid" style="height: 100vh;">
-
+    <div id="section1" class="container-fluid bg-dark text-white row" style="height: 100vh; ">
+        <div class="col-sm-4">
+            <img src="./image/Caesar.jfif" alt="XD" width="100%" style="margin-top: 10vh; margin-bottom: 10vh;">
+        </div>
+        <div class="col-sm-4">
+            <h1 class="display-1" style="margin-top:40vh">Caesar cipher</h1>
+        </div>
+        <div class="col-sm-4">
+            <img src="./image/Blog_Post_07_02.jpg" alt="XD" width="100%" style="margin-top: 10vh; margin-bottom: 10vh;">
+        </div>
     </div>
 
-    <div id="section2" class="container-fluid" style="height: 100vh;">
-
+    <div id="section2" class="container-fluid">
+        <div class="row" style="height: 100vh;">
+            <div class="col-md-2 col-1 col-lg-3 p-3 bg-light text-white"></div>
+            <div class="col-md-8 col-10 col-lg-6 p-3 bg-dark text-white d-flex flex-column">
+                <h1 class="display-1" style="margin-top: 5vh; text-align: center; margin-bottom: 5vh;">Caesar Cipher</h1>
+                <p>The Caesar Cipher technique is one of the earliest and simplest method of encryption technique. It’s simply a type of substitution cipher, i.e., each letter of a given text is replaced by a letter some fixed number of positions down the alphabet. For example with a shift of 1, A would be replaced by B, B would become C, and so on. The method is apparently named after Julius Caesar, who apparently used it to communicate with his officials. 
+                    Thus to cipher a given text we need an integer value, known as shift which indicates the number of position each letter of the text has been moved down. 
+                    The encryption can be represented using modular arithmetic by first transforming the letters into numbers, according to the scheme, A = 0, B = 1,…, Z = 25. Encryption of a letter by a shift n can be described mathematically as. 
+                </p>
+                <img src="./image/Intro1.png" alt="">
+            </div>
+            <div class="col-md-2 col-1 col-lg-3 p-3 bg-light text-white"></div>
+        </div>
     </div>
 
     <div id="section3" class="container-fluid mt-3">
-        <div class="row" style="height: 100vh;">
-            <div class="col-md-2 col-1 col-lg-3 p-3 bg-primary text-white"></div>
+        <div class="row" style="height: 100vh;text-align: center; margin-bottom: 5vh;">
+            <div class="col-md-2 col-1 col-lg-3 p-3 bg-light text-white"></div>
             <div class="col-md-8 col-10 col-lg-6 p-3 bg-dark text-white d-flex flex-column">
-                <h1 style="margin-top: 20vh;">Casear chipher</h1>
+                <h1 style="margin-top: 20vh;" class="display-1">Caesar cipher</h1>
 
                 <label for="">input your plaintext</label>
 
@@ -78,7 +112,7 @@
 
                 <h6 id="output2"></h6>
             </div>
-            <div class="col-md-2 col-1 col-lg-3 p-3 bg-primary text-white"></div>
+            <div class="col-md-2 col-1 col-lg-3 p-3 bg-light text-white"></div>
         </div>
     </div>
 
@@ -95,13 +129,14 @@
             animateText(output);
         }
 
+        // animateText
         function animateText(textArea) {
             let text = textArea.value;
             let to = text.length,
                 from = 0;
 
             animate({
-                duration: 5000,
+                duration: 1000,
                 timing: bounce,
                 draw: function(progress) {
                 let result = (to - from) * progress + from;
@@ -117,18 +152,19 @@
             }
         }
 
-        function full(){
-            let str = document.getElementById('input').value;
-            document.getElementById('show_all').value = str;
-            let show = document.getElementById('show_all');
-            show.innerHTML = "";
-            for (let i = 1; i < 27;i++){
-                let ans = rot(str,i);
-                let h3 = document.createElement("h3");
-                h3.innerText = ans;
-                show.appendChild(h3);
-            }
-        }
+        // function full(){
+        //     let str = document.getElementById('input').value;
+        //     document.getElementById('show_all').value = str;
+        //     let show = document.getElementById('show_all');
+        //     show.innerHTML = "";
+        //     for (let i = 1; i < 27;i++){
+        //         let ans = rot(str,i);
+        //         let h3 = document.createElement("h3");
+        //         h3.innerText = ans;
+        //         show.appendChild(h3);
+        //     }
+        // }
+
         function output_decrypt(){
             let str = document.getElementById('input').value;
             let key = decrypt(str);
