@@ -16,10 +16,9 @@ function decrypt(str){
 
     let LEN = 26;
 
-    for (let j = 0; j < LEN; j++) { /*变量j穷举密钥*/
+    for (let j = 0; j < LEN; j++) { 
         let sum = 0, tem;
         for (let i = 0; i < LEN; i++) {
-            /* 求sum{p[i]*q[i+j]}之和 */
             let t = (i+j) % 26;
             sum += word_frequency[i] * count[t];
         }
