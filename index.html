@@ -27,6 +27,19 @@
             background: rgba(255, 255, 255, 0.12);
             -webkit-box-shadow: inset 0 0 10px rgba(23, 16, 16, 0.952);
         }
+
+        .image:hover{
+            background: linear-gradient(135deg, rgb(100, 0, 0), rgb(170, 170, 0), rgb(0, 68, 0));
+            animation: animate 2s linear infinite;
+            border-top: red 5px solid;
+            border-bottom: red 5px solid;
+        }
+
+        @keyframes animate {
+        100%{
+            filter: hue-rotate(360deg);
+            }
+        }
         
         </style>
     </head>
@@ -44,19 +57,22 @@
             <li class="nav-item">
               <a class="nav-link" href="#section3">Caesar cipher</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://nhwwnhww.github.io/">back</a>
+            </li>
           </ul>
         </div>
     </nav>
 
     <div id="section1" class="container-fluid bg-dark text-white row" style="height: 100vh; ">
         <div class="col-sm-4">
-            <img src="./image/Caesar.jfif" alt="XD" width="100%" style="margin-top: 10vh; margin-bottom: 10vh;">
+            <img src="./image/Caesar.jfif" class="image" alt="XD" width="100%" style="margin-top: 10vh; margin-bottom: 10vh;">
         </div>
         <div class="col-sm-4">
             <h1 class="display-1" style="margin-top:40vh">Caesar cipher</h1>
         </div>
         <div class="col-sm-4">
-            <img src="./image/Blog_Post_07_02.jpg" alt="XD" width="100%" style="margin-top: 10vh; margin-bottom: 10vh;">
+            <img src="./image/Blog_Post_07_02.jpg" class="image" alt="XD" width="100%" style="margin-top: 10vh; margin-bottom: 10vh;">
         </div>
     </div>
 
@@ -69,7 +85,7 @@
                     Thus to cipher a given text we need an integer value, known as shift which indicates the number of position each letter of the text has been moved down. 
                     The encryption can be represented using modular arithmetic by first transforming the letters into numbers, according to the scheme, A = 0, B = 1,…, Z = 25. Encryption of a letter by a shift n can be described mathematically as. 
                 </p>
-                <img src="./image/Intro1.png" alt="">
+                <img src="./image/Intro1.png" class="image" alt="">
             </div>
             <div class="col-md-2 col-1 col-lg-3 p-3 bg-light text-white"></div>
         </div>
@@ -99,9 +115,10 @@
 
                 <div class="row">
                     <div class="col-1"></div>
-                    <button onclick="output_encrypt()" class="btn btn-info col-4">encrypt</button>
+                    <button onclick="output_encrypt()" class="btn btn-info col-4 " data-bs-toggle="modal" data-bs-target="#myModal" id="encrypt">encrypt</button>
+                    
                     <div class="col-2"></div>
-                    <button onclick="output_decrypt()" class="btn btn-danger col-4">decrypt</button>
+                    <button onclick="output_decrypt()" class="btn btn-danger col-4" data-bs-toggle="modal" data-bs-target="#myModal_decrypt">decrypt</button>
                     <div class="col-1"></div>
                 </div>
 
@@ -116,17 +133,78 @@
         </div>
     </div>
 
+    <!-- 模态框 -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">encryption</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- 模态框内容 -->
+        <div class="modal-body">
+            encrypted successfully
+        </div>
+  
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 -->
+<div class="modal" id="myModal_decrypt">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">decryption</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- 模态框内容 -->
+        <div class="modal-body">
+            Decrypted successfully
+        </div>
+  
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
     <script>
 
         function output_encrypt(){
             let str = document.getElementById('input').value;
             let k = document.getElementById('k_value').value;
-            let ans = rot(str,parseInt(k));
 
-            let output = document.getElementById('output');
+            if(!str){
+                alert("Please add the Plaintext you want to encrypt");
+            }
+            else if(!k){
+                alert("Please add your key");
+            }
+            else{
+                let ans = rot(str,parseInt(k));
 
-            document.getElementById('output').value = ans;
-            animateText(output);
+                let output = document.getElementById('output');
+
+                document.getElementById('output').value = ans;
+                animateText(output);
+            }
+
+            
         }
 
         // animateText
@@ -167,16 +245,22 @@
 
         function output_decrypt(){
             let str = document.getElementById('input').value;
-            let key = decrypt(str);
-            document.getElementById('output2').innerText = 'Guess the key is ' + key;
 
-            let k = Math.abs(key-26);
-            let ans = rot(str,parseInt(k));
+            if(!str){
+                alert("Please add the Plaintext you want to encrypt");
+            }
+            else {
+                let key = decrypt(str);
+                document.getElementById('output2').innerText = 'The key guessed by the algorithm is ' + key;
 
-            let output = document.getElementById('output');
+                let k = Math.abs(key-26);
+                let ans = rot(str,parseInt(k));
 
-            document.getElementById('output').value = ans;
-            animateText(output);
+                let output = document.getElementById('output');
+
+                document.getElementById('output').value = ans;
+                animateText(output);
+            }
         }
         
         
